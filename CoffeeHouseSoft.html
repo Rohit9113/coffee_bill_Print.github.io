@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coffee House</title>
+    <style>
+        table,
+        th,
+        td {
+            border: 1px solid black;
+
+        }
+    </style>
+</head>
+
+<body>
+    <h1 style="text-align: center;">Welcome To Coffee House
+        <hr>
+    </h1>
+    <h4>Coffee's Menu</h4>
+    <table style="width:35%">
+        <tr>
+            <th>Product/Add-on</th>
+            <th>Milk</th>
+            <th>Cream</th>
+            <th>Latte</th>
+        </tr>
+        <tr>
+            <td>Espresso</td>
+            <td>Rs.60</td>
+            <td>Rs.75</td>
+            <td>Rs.100</td>
+        </tr>
+        <tr>
+            <td>Cappuccino</td>
+            <td>Rs.80</td>
+            <td>Rs.90</td>
+            <td>Rs.125</td>
+        </tr>
+        <tr>
+            <td>Latte</td>
+            <td>Rs.100</td>
+            <td>Rs.125</td>
+            <td>Rs.150</td>
+        </tr>
+    </table><br><br>
+    </form>
+    <p> Choose Your Sweet Coffee:
+        <select id="select1" onclick="getOption()">
+            <option value="Espresso">Espresso</option>
+            <option value="Cappuccino">Cappuccino</option>
+            <option value="Latte">Latte</option>
+        </select>
+    </p>
+    <p> The value of the option selected is:
+        <span class="output"></span>
+    </p>
+    <button id="count" onclick="count()"> count </button>
+    <p id="value"></p>
+    <br><br>
+
+    <input type="checkbox" id="Milk" name="Milk" value="Milk" onclick="checkbox()">
+    <label for="Milk">Milk</label><span class="output"></span><br>
+    <input type="checkbox" id="Cream" name="Cream" value="Cream" onclick="checkbox()">
+    <label for="Cream">Cream</label><br>
+    <input type="checkbox" id="Latte" name="Latte" value="Latte" onclick="checkbox()">
+    <label for="Latte">Latte</label><br><br>
+    </form>
+    <button type="submit" onclick="final()">Order for submit</button>
+    <div id="text" style="margin: auto; width: 50%; padding: 10px;">
+        <h2 id="type"></h2>
+        <h2 id="extra"></h2>
+        <h2 id="price"></h2>
+        <h2 id="count"></h2>
+        <h2 id="total"></h2>
+    </div>
+    <script>
+        ob = {
+            "type": "",
+            "total": "",
+            "extra": "",
+            "price": "",
+            "count": ""
+        }
+
+        function getOption() {
+            selectElement = document.querySelector('#select1');
+            output = selectElement.value;
+            ob.type = output;
+            document.querySelector('.output').textContent = output;
+        }
+        let count1 = 0;
+        const count = () => {
+
+            count1 = count1 + 1;
+            document.getElementById("value").innerHTML = count1;
+            ob.count = count1;
+
+        }
+        function checkbox() {
+            var checkBox = document.getElementById("Milk");
+            var checkBox1 = document.getElementById("Cream");
+            var checkBox2 = document.getElementById("Latte");
+            if (checkBox.checked == true) {
+                const value = document.getElementById("Milk").value;
+                ob.extra = value;
+
+            }
+            console.log("ob", ob);
+            if (checkBox1.checked == true) {
+                const value = document.getElementById("Cream").value;
+                ob.extra = value;
+
+            }
+            if (checkBox2.checked == true) {
+                const value = document.getElementById("Latte").value;
+                ob.extra = value;
+            }
+            console.log("ob", ob);
+            price(ob);
+        }
+
+        const price = (ob) => {
+            if (ob.type != undefined && ob.type == "Espresso" && ob.extra == "Milk") {
+                ob.price = 60;
+            }
+            else if (ob.type != undefined && ob.type == "Espresso" && ob.extra == "Cream") {
+                ob.price = 75;
+            }
+            else if (ob.type != undefined && ob.type == "Espresso" && ob.extra == "Latte") {
+                ob.price = 100;
+            }
+            else if (ob.type != undefined && ob.type == "Cappuccino" && ob.extra == "Milk") {
+                ob.price = 80;
+            }
+            else if (ob.type != undefined && ob.type == "Cappuccino" && ob.extra == "Cream") {
+                ob.price = 90;
+            }
+            else if (ob.type != undefined && ob.type == "Cappuccino" && ob.extra == "Latte") {
+                ob.price = 125;
+            }
+            else if (ob.type != undefined && ob.type == "Latte" && ob.extra == "Milk") {
+                ob.price = 100;
+            }
+            else if (ob.type != undefined && ob.type == "Latte" && ob.extra == "Cream") {
+                ob.price = 125;
+            }
+            else if (ob.type != undefined && ob.type == "Latte" && ob.extra == "Latte") {
+                ob.price = 150;
+            }
+
+
+
+
+            coffeeHouse()
+        }
+
+        const coffeeHouse = () => {
+            console.log("ob", ob);
+            ob.total = ob.price * ob.count;
+            console.log("ob", ob);
+
+        }
+        const final = () => {
+            text = document.getElementById("text");
+            if (ob.type != undefined && ob.extra != undefined && ob.price != undefined && ob.count != 0) {
+                text.style.display = "block"
+                text.style.backgroundColor = "Green"
+                document.getElementById("type").innerHTML = `Coffee type:- ${ob.type}`;
+                document.getElementById("extra").innerHTML = `Flavor:- ${ob.extra}`;
+                document.getElementById("price").innerHTML = `Price:- ${ob.price}`;
+                document.getElementById("count").innerHTML = `Number of Cup:- ${ob.count}`;
+                document.getElementById("total").innerHTML = `Total Amount:- ${ob.total}`;
+            }
+            else {
+                text.style.display = none;
+            }
+        }
+    </script>
+
+
+</body>
+
+</html>
